@@ -13,9 +13,14 @@ namespace BasicConcepts.StateActionsReducersTutorial
 			services.AddFluxor(o => o
 				.ScanAssemblies(typeof(Program).Assembly));
 
-			IServiceProvider serviceProvider = services.BuildServiceProvider();
+			IServiceProvider serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions
+			{
+				ValidateOnBuild = true,
+				ValidateScopes = true,
+			});
 
-			var app = serviceProvider.GetRequiredService<App>();
+			using var scope = serviceProvider.CreateScope();
+			var app = scope.ServiceProvider.GetRequiredService<App>();
 			app.Run();
 		}
 	}

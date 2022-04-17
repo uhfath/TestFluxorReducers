@@ -44,7 +44,7 @@ namespace BasicConcepts.StateActionsReducersTutorial
 				switch (input.ToLowerInvariant())
 				{
 					case "1":
-						var action = new IncrementCounterAction();
+						var action = new IncrementCounterAction(2);
 						Dispatcher.Dispatch(action);
 						break;
 
